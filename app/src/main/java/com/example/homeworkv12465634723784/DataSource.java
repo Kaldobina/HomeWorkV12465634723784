@@ -7,7 +7,7 @@ public class DataSource {
 
     private static final int SPAN_COUNT_PORTRAIT = 3, SPAN_COUNT_LANDSCAPE = 4;
 
-    private static int COUNT_OF_ITEMS = 100, UPPER_RANGE = 100;
+    private static int COUNT_OF_ITEMS = 100;
 
     private static List<MyData> myData;
 
@@ -51,7 +51,6 @@ public class DataSource {
     }
 
     public static class MyData {
-        int color;
         int value;
 
         public MyData(int value) {
