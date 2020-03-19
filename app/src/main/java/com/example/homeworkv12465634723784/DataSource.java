@@ -2,9 +2,10 @@ package com.example.homeworkv12465634723784;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class DataSource {
+
+    private static final int SPAN_COUNT_PORTRAIT = 3, SPAN_COUNT_LANDSCAPE = 4;
 
     private static int COUNT_OF_ITEMS = 100, UPPER_RANGE = 100;
 
@@ -12,18 +13,30 @@ public class DataSource {
 
     private static DataSource sInstance;
 
-    public DataSource() {
+    private DataSource() {
         myData = new ArrayList<>();
 
         for (int i = 0; i < COUNT_OF_ITEMS; i++){
-            myData.add(new MyData(new Random().nextInt(UPPER_RANGE), i % 2 == 0 ? R.color.colorEven : R.color.colorOdd));
+            myData.add(new MyData(i+1));
         }
+    }
+
+    public static int getCountOfItems() {
+        return COUNT_OF_ITEMS;
+    }
+
+    public static int getSpanCountPortrait() {
+        return SPAN_COUNT_PORTRAIT;
+    }
+
+    public static int getSpanCountLandscape() {
+        return SPAN_COUNT_LANDSCAPE;
     }
 
     public static void addItem() {
         int position = COUNT_OF_ITEMS++;
-        myData.add(position, new MyData(new Random().nextInt(UPPER_RANGE), R.color.colorEven));
-        MainActivity.adapter.notifyItemInserted(position);
+        myData.add(position, new MyData(position+1));
+        MainActivity.adapter.notifyItemInserted(position+1);
     }
 
     public List<MyData> getData() {
@@ -41,8 +54,7 @@ public class DataSource {
         int color;
         int value;
 
-        public MyData(int value, int color) {
-            this.color = color;
+        public MyData(int value) {
             this.value = value;
         }
     }

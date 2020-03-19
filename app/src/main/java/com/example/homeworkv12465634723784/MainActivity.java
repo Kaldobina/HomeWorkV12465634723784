@@ -42,6 +42,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        for (int position = 0; position < DataSource.getCountOfItems(); position++){
+            outState.putString(position + "", adapter.getItem(position));
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        for (int position = 0; position < DataSource.getCountOfItems(); position++){
+            savedInstanceState.getString(position + "", adapter.getItem(position));
+        }
+    }
+
     class MyDataAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         public List<DataSource.MyData> myData;

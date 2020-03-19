@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="@color/colorEven" />
 </LinearLayout>

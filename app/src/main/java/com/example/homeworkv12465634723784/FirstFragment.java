@@ -21,8 +21,6 @@ import java.util.Objects;
 
 public class FirstFragment extends Fragment {
 
-    private static final int SPAN_COUNT_PORTRAIT = 3, SPAN_COUNT_LANDSCAPE = 4;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -34,9 +32,9 @@ public class FirstFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_first, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.list);
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), SPAN_COUNT_PORTRAIT));
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), DataSource.getSpanCountPortrait()));
         } else if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), SPAN_COUNT_LANDSCAPE));
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), DataSource.getSpanCountLandscape()));
         }
 
         recyclerView.setAdapter(MainActivity.adapter);
