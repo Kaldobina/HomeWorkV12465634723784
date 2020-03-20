@@ -38,7 +38,7 @@ public class DataSource {
     public static void addItem() {
         int position = COUNT_OF_ITEMS++;
         myData.add(position, new MyData(position+1));
-        MainActivity.adapter.notifyItemInserted(position+1);
+        FirstFragment.adapter.notifyItemInserted(position+1);
     }
 
     public List<MyData> getData() {

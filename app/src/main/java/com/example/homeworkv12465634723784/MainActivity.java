@@ -26,7 +26,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    static MyDataAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, new FirstFragment())
                     .commit();
         }
-        adapter = new MyDataAdapter(DataSource.getInstance().getData());
-
 
     }
 
@@ -59,67 +56,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }*/
 
-    class MyDataAdapter extends RecyclerView.Adapter<MyViewHolder> {
-
-        public List<DataSource.MyData> myData;
-
-        public MyDataAdapter(List<DataSource.MyData> myData) {
-            this.myData = myData;
-        }
-
-        @NonNull
-        @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-            return new MyViewHolder(v);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            holder.value.setText(myData.get(position).value + "");
-            if(myData.get(position).value % 2 == 0) {
-                holder.value.setTextColor(Color.RED);
-            } else holder.value.setTextColor(Color.BLUE);
-        }
-
-
-
-        public String getItem(int position) {
-            return myData.get(position).value + "";
-        }
-
-        @Override
-        public int getItemCount() {
-            return myData.size();
-        }
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-
-        public final TextView value;
-
-        public MyViewHolder(@NonNull final View itemView) {
-            super(itemView);
-            value = itemView.findViewById(R.id.number_item);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FragmentManager fm = getSupportFragmentManager();
-                    Fragment fragment = fm.findFragmentById(R.id.frag_second);
-                    if (fragment == null){
-                        fragment = new FragmentSecond();
-                        Bundle bundle = new Bundle();
-                        bundle.putString(FragmentSecond.KEY, adapter.getItem(getPosition()));
-                        fragment.setArguments(bundle);
-                    }
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragment_container, fragment);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                }
-            });
-        }
-    }
 
 }
