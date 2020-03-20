@@ -40,23 +40,24 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter = new MyDataAdapter(DataSource.getInstance().getData());
 
+
     }
 
-    @Override
+    /*@Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        for (int position = 0; position < DataSource.getCountOfItems(); position++){
+        for (int position = 0; position < adapter.getItemCount(); position++){
             outState.putString(position + "", adapter.getItem(position));
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        for (int position = 0; position < DataSource.getCountOfItems(); position++){
+        for (int position = 0; position < adapter.getItemCount(); position++){
             savedInstanceState.getString(position + "", adapter.getItem(position));
         }
-    }
+    }*/
 
     class MyDataAdapter extends RecyclerView.Adapter<MyViewHolder> {
 

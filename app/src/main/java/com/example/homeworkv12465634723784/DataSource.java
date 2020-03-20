@@ -9,6 +9,8 @@ public class DataSource {
 
     private static int COUNT_OF_ITEMS = 100;
 
+    private static int NEW_COUNT;
+
     private static List<MyData> myData;
 
     private static DataSource sInstance;
@@ -22,7 +24,7 @@ public class DataSource {
     }
 
     public static int getCountOfItems() {
-        return COUNT_OF_ITEMS;
+        return NEW_COUNT;
     }
 
     public static int getSpanCountPortrait() {

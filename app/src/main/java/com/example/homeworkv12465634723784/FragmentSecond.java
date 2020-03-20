@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,6 @@ public class FragmentSecond extends Fragment {
 
     public static final String KEY = "text";
     private TextView textView;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
