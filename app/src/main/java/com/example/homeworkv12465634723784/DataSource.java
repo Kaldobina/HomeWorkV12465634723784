@@ -7,9 +7,7 @@ public class DataSource {
 
     private static final int SPAN_COUNT_PORTRAIT = 3, SPAN_COUNT_LANDSCAPE = 4;
 
-    public static int COUNT_OF_ITEMS = 100;
-
-    private static int NEW_COUNT;
+    public static final int COUNT_OF_ITEMS = 100;
 
     private static List<MyData> myData;
 
@@ -32,8 +30,14 @@ public class DataSource {
     }
 
     public static void addItem() {
-        int position = COUNT_OF_ITEMS++;
-        myData.add(position, new MyData(position + 1));
+        final int newPosition = myData.size() + 1;
+        myData.add(new MyData(newPosition));
+    }
+
+    public void updateSize (int size) {
+        for (int i = myData.size(); i < size; i++){
+            myData.add(new MyData(i+1));
+        }
     }
 
     public List<MyData> getData() {

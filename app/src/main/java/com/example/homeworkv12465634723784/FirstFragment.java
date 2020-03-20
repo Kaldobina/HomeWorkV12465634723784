@@ -36,6 +36,9 @@ public class FirstFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        if (savedInstanceState != null){
+            DataSource.getInstance().updateSize(savedInstanceState.getInt(KEY_SIZE_OF_LIST));
+        }
         final View view = inflater.inflate(R.layout.fragment_first, container, false);
        // if (savedInstanceState == null){
             RecyclerView recyclerView = view.findViewById(R.id.list);
@@ -129,12 +132,12 @@ public class FirstFragment extends Fragment {
             });
         }
     }
-/*
+
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_SIZE_OF_LIST, DataSource.getInstance().getData().size());
-    }*/
+    }
 
 
 
