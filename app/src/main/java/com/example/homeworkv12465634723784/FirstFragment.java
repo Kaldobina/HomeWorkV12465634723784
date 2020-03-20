@@ -23,7 +23,8 @@ import java.util.Objects;
 
 
 public class FirstFragment extends Fragment {
-    static MyDataAdapter adapter;
+    MyDataAdapter adapter;
+    private final static String KEY_SIZE_OF_LIST = "key";
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -36,23 +37,31 @@ public class FirstFragment extends Fragment {
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_first, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.list);
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), DataSource.getSpanCountPortrait()));
-        } else if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), DataSource.getSpanCountLandscape()));
-        }
+       // if (savedInstanceState == null){
+            RecyclerView recyclerView = view.findViewById(R.id.list);
+            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), DataSource.getSpanCountPortrait()));
+            } else if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), DataSource.getSpanCountLandscape()));
+            }
+            final MyDataAdapter adapter = new MyDataAdapter(DataSource.getInstance().getData());
+            recyclerView.setAdapter(adapter);
 
-        recyclerView.setAdapter(adapter);
-
-        Button addButton = view.findViewById(R.id.add_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DataSource.addItem();
+            Button addButton = view.findViewById(R.id.add_button);
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataSource.addItem();
+                    adapter.notifyItemInserted(DataSource.getInstance().getData().size());
+                }
+            });
+        //}
+            /*else {
+            if (adapter.getItemCount() < savedInstanceState.getInt(KEY_SIZE_OF_LIST)){
+                DataSource.COUNT_OF_ITEMS = savedInstanceState.getInt(KEY_SIZE_OF_LIST);
 
             }
-        });
+        }*/
 
 
         return view;
@@ -120,8 +129,12 @@ public class FirstFragment extends Fragment {
             });
         }
     }
-
-
+/*
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_SIZE_OF_LIST, DataSource.getInstance().getData().size());
+    }*/
 
 
 

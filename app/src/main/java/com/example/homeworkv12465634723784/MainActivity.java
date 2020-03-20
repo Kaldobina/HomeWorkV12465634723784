@@ -40,21 +40,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        for (int position = 0; position < adapter.getItemCount(); position++){
-            outState.putString(position + "", adapter.getItem(position));
-        }
-    }*/
-
-    /*@Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        for (int position = 0; position < adapter.getItemCount(); position++){
-            savedInstanceState.getString(position + "", adapter.getItem(position));
-        }
-    }*/
-
 
 }

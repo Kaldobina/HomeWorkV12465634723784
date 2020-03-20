@@ -7,7 +7,7 @@ public class DataSource {
 
     private static final int SPAN_COUNT_PORTRAIT = 3, SPAN_COUNT_LANDSCAPE = 4;
 
-    private static int COUNT_OF_ITEMS = 100;
+    public static int COUNT_OF_ITEMS = 100;
 
     private static int NEW_COUNT;
 
@@ -23,10 +23,6 @@ public class DataSource {
         }
     }
 
-    public static int getCountOfItems() {
-        return NEW_COUNT;
-    }
-
     public static int getSpanCountPortrait() {
         return SPAN_COUNT_PORTRAIT;
     }
@@ -37,8 +33,7 @@ public class DataSource {
 
     public static void addItem() {
         int position = COUNT_OF_ITEMS++;
-        myData.add(position, new MyData(position+1));
-        FirstFragment.adapter.notifyItemInserted(position+1);
+        myData.add(position, new MyData(position + 1));
     }
 
     public List<MyData> getData() {
