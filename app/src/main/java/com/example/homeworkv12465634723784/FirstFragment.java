@@ -23,13 +23,11 @@ import java.util.Objects;
 
 
 public class FirstFragment extends Fragment {
-    private MyDataAdapter adapter;
     private final static String KEY_SIZE_OF_LIST = "key";
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new MyDataAdapter(DataSource.getInstance().getData());
     }
 
     @Override
@@ -94,12 +92,6 @@ public class FirstFragment extends Fragment {
             } else holder.value.setTextColor(Color.BLUE);
         }
 
-
-
-        String getItem(int position) {
-            return myData.get(position).value + "";
-        }
-
         @Override
         public int getItemCount() {
             return myData.size();
@@ -123,7 +115,7 @@ public class FirstFragment extends Fragment {
                     if (fragment == null){
                         fragment = new FragmentSecond();
                         Bundle bundle = new Bundle();
-                        bundle.putString(FragmentSecond.KEY, adapter.getItem(getPosition()));
+                        bundle.putString(FragmentSecond.KEY, String.valueOf(DataSource.getInstance().getData().get(getPosition()).value));
                         fragment.setArguments(bundle);
                     }
                     FragmentTransaction ft = fm.beginTransaction();
