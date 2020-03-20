@@ -3,13 +3,13 @@ package com.example.homeworkv12465634723784;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataSource {
+class DataSource {
 
     private static final int SPAN_COUNT_PORTRAIT = 3, SPAN_COUNT_LANDSCAPE = 4;
 
-    public static final int COUNT_OF_ITEMS = 100;
+    private static final int COUNT_OF_ITEMS = 100;
 
-    private static List<MyData> myData;
+    private List<MyData> myData;
 
     private static DataSource sInstance;
 
@@ -21,40 +21,40 @@ public class DataSource {
         }
     }
 
-    public static int getSpanCountPortrait() {
+    static int getSpanCountPortrait() {
         return SPAN_COUNT_PORTRAIT;
     }
 
-    public static int getSpanCountLandscape() {
+    static int getSpanCountLandscape() {
         return SPAN_COUNT_LANDSCAPE;
     }
 
-    public static void addItem() {
-        final int newPosition = myData.size() + 1;
-        myData.add(new MyData(newPosition));
+    static void addItem() {
+        final int newPosition = DataSource.getInstance().getData().size() + 1;
+        DataSource.getInstance().getData().add(new MyData(newPosition));
     }
 
-    public void updateSize (int size) {
+    void updateSize(int size) {
         for (int i = myData.size(); i < size; i++){
             myData.add(new MyData(i+1));
         }
     }
 
-    public List<MyData> getData() {
+    List<MyData> getData() {
         return myData;
     }
 
-    public synchronized static  DataSource getInstance() {
+    synchronized static  DataSource getInstance() {
         if (sInstance == null){
             sInstance = new DataSource();
         }
         return sInstance;
     }
 
-    public static class MyData {
+    static class MyData {
         int value;
 
-        public MyData(int value) {
+        MyData(int value) {
             this.value = value;
         }
     }

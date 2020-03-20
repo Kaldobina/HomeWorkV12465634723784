@@ -1,11 +1,11 @@
 package com.example.homeworkv12465634723784;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,7 +23,7 @@ import java.util.Objects;
 
 
 public class FirstFragment extends Fragment {
-    MyDataAdapter adapter;
+    private MyDataAdapter adapter;
     private final static String KEY_SIZE_OF_LIST = "key";
 
 
@@ -33,7 +33,7 @@ public class FirstFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (savedInstanceState != null){
@@ -42,7 +42,7 @@ public class FirstFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_first, container, false);
        // if (savedInstanceState == null){
             RecyclerView recyclerView = view.findViewById(R.id.list);
-            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (Objects.requireNonNull(getActivity()).getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(), DataSource.getSpanCountPortrait()));
             } else if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(), DataSource.getSpanCountLandscape()));
@@ -72,9 +72,9 @@ public class FirstFragment extends Fragment {
 
     class MyDataAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-        public List<DataSource.MyData> myData;
+        List<DataSource.MyData> myData;
 
-        public MyDataAdapter(List<DataSource.MyData> myData) {
+        MyDataAdapter(List<DataSource.MyData> myData) {
             this.myData = myData;
         }
 
@@ -85,6 +85,7 @@ public class FirstFragment extends Fragment {
             return new MyViewHolder(v);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             holder.value.setText(myData.get(position).value + "");
@@ -95,7 +96,7 @@ public class FirstFragment extends Fragment {
 
 
 
-        public String getItem(int position) {
+        String getItem(int position) {
             return myData.get(position).value + "";
         }
 
@@ -107,9 +108,9 @@ public class FirstFragment extends Fragment {
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public final TextView value;
+        final TextView value;
 
-        public MyViewHolder(@NonNull final View itemView) {
+        MyViewHolder(@NonNull final View itemView) {
             super(itemView);
             value = itemView.findViewById(R.id.number_item);
 
@@ -117,6 +118,7 @@ public class FirstFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     FragmentManager fm = getFragmentManager();
+                    assert fm != null;
                     Fragment fragment = fm.findFragmentById(R.id.frag_second);
                     if (fragment == null){
                         fragment = new FragmentSecond();
